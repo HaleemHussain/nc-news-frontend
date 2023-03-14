@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useEffect, useState} from "react";
 import {fetchArticles} from "../api";
+import {Link} from "react-router-dom";
 
 
 export default function Articles() {
@@ -32,11 +33,13 @@ export default function Articles() {
                                     <Card.Title>
                                         {article.title}
                                     </Card.Title>
-                                    <Card.Text>
-                                        <div>Topic: {article.topic}</div>
-                                        <div>Author:{article.author}</div>
-                                    </Card.Text>
-                                    <Button variant="primary m-1">View Article</Button>
+                                    <div className='card-text'>
+                                        <p>Topic: {article.topic}</p>
+                                        <p>Author:{article.author}</p>
+                                    </div>
+                                    <Link to={`/articles/${article.article_id}`}>
+                                        <Button variant="primary m-1">View Article</Button>
+                                    </Link>
                                 </Card.Body>
                             </Card>
                         </Col>
