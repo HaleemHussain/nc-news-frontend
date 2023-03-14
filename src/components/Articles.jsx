@@ -4,7 +4,7 @@ import {Container} from "react-bootstrap";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useEffect, useState} from "react";
-import {fetchArticles} from "../api";
+import {getArticles} from "../api";
 import {Link} from "react-router-dom";
 
 
@@ -13,7 +13,7 @@ export default function Articles() {
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         setIsLoading(true);
-        fetchArticles().then((data) => {
+        getArticles().then((data) => {
             setArticles(data);
             setIsLoading(false);
         });

@@ -1,6 +1,7 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {fetchArticleById} from "../api";
+import {getArticleById} from "../api";
+import Comments from "./Comments";
 
 export default function Article() {
     const {article_id} = useParams();
@@ -8,7 +9,7 @@ export default function Article() {
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         setIsLoading(true);
-        fetchArticleById(article_id).then((data) => {
+        getArticleById(article_id).then((data) => {
             setArticle(data);
             setIsLoading(false);
         });
@@ -27,6 +28,7 @@ export default function Article() {
                         <p className="card-text"><small className="text-muted">By {article.author}</small></p>
                     </div>
                 </div>
+                <Comments article_id={article_id}/>
             </div>
         </>
     )
