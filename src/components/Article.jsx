@@ -18,7 +18,7 @@ export default function Article() {
         });
     }, [article_id]);
 
-    const onClick = () => {
+    const upVote = () => {
         setUserVote(1);
         articleVote(article.article_id).catch(() => {
             setUserVote(0);
@@ -44,7 +44,7 @@ export default function Article() {
                         <p className="card-text">{article.body}</p>
                         <p className="card-text"><small className="text-muted">By {article.author}</small></p>
                         <div className='float-end'>
-                            <button onClick={onClick} type="button" className="btn btn-primary">
+                            <button onClick={upVote} disabled={userVote !== 0} type="button" className="btn btn-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                      fill="currentColor" className="bi bi-hand-thumbs-up"
                                      viewBox="0 0 16 16">
