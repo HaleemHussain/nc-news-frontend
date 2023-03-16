@@ -18,7 +18,15 @@ export default function Articles() {
             setIsLoading(false);
         });
     }, []);
-    if (isLoading) return <h1>Loading...</h1>
+
+    if (isLoading) return (
+        <div className='container pt-4 h-100 d-flex align-items-center justify-content-center'>
+            <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    )
+
     return (
         <Container className="mt-3">
             <Row>

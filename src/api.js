@@ -5,22 +5,32 @@ const API = axios.create({
 });
 
 export const getArticles = () => {
-    return API.get("/articles").then((res) => {
+    return API.get("/articles")
+        .then((res) => {
         const {data} = res;
         return data.articles;
     });
 };
 
 export const getArticleById = (article_id) => {
-    return API.get(`/articles/${article_id}`).then((res) => {
+    return API.get(`/articles/${article_id}`)
+        .then((res) => {
         const {data} = res;
         return data.article;
     });
 };
 
 export const getComments = (article_id) => {
-    return API.get(`/articles/${article_id}/comments`).then((res) => {
+    return API.get(`/articles/${article_id}/comments`)
+        .then((res) => {
         const {data} = res;
         return data.comments;
     });
-}
+};
+
+export const articleVote = (article_id) => {
+    return API.patch(`/articles/${article_id}`, {inc_votes: 1})
+        .then(({data}) => {
+            return data;
+        });
+};
