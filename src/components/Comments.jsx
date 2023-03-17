@@ -58,7 +58,7 @@ export default function Comments({article_id}) {
                 </div>
                 <div className='container'>
                 <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
+                    <div className="mb-3 mt-1">
                         <label htmlFor="commentBox" className="form-label">Leave a comment</label>
                         <textarea value={newComment} onChange={handleChange} className="form-control"
                                   id="commentBox" rows="3" placeholder='Leave a comment...'>
