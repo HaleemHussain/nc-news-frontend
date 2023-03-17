@@ -1,24 +1,80 @@
 import {useEffect, useState} from "react";
-import {getComments} from "../api";
+import {getComments, addComment} from "../api";
 
 export default function Comments({article_id}) {
     const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [submitFail, setSubmitFail] = useState(false);
 
     useEffect(() => {
         getComments(article_id).then((data) => {
             setComments(data);
+            setIsLoading(false);
         });
     }, [article_id]);
+
+    const handleChange = (event) => {
+        setNewComment(event.target.value);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setIsSubmitting(true);
+
+        addComment(article_id, newComment)
+            .then((data) => {
+                setComments([...comments, data]);
+                setIsSubmitting(false);
+                setSubmitSuccess(true);
+                setNewComment("");
+            })
+            .catch(() => {
+                setSubmitFail(true);
+                setSubmitSuccess(false);
+                setIsSubmitting(false);
+            });
+    };
+
+    const isCommentEmpty = () => {
+        return newComment.trim() === "";
+    };
+
+    if (isLoading) return (
+        <div className='container pt-4 h-100 d-flex align-items-center justify-content-center'>
+            <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    )
+
     return (
         <>
             <div className="card">
                 <div className="card-header">
                     Comments
                 </div>
+                <div className='container'>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                        <label htmlFor="commentBox" className="form-label">Leave a comment</label>
+                        <textarea value={newComment} onChange={handleChange} className="form-control"
+                                  id="commentBox" rows="3" placeholder='Leave a comment...'>
+                        </textarea>
+                    </div>
+                    <button type="submit" disabled={isSubmitting || isCommentEmpty()}
+                            className="btn btn-primary">{isSubmitting ? "Submitting..." : "Submit"}
+                    </button>
+                    {submitSuccess &&<div className="alert alert-success mt-3">Your comment has successfully been posted!</div>}
+                    {submitFail && <div className="alert alert-danger mt-3">Your comment has not been posted! Please try again.</div>}
+                </form>
+                </div>
                 {comments.map((comment) => {
                     return (
                         <div key={comment.comment_id} className="card-body">
-                            <blockquote className=" border-bottom mb-0">
+                            <blockquote className=" border-top pt-3">
                                 <p>{comment.body}</p>
                                 <footer className="blockquote-footer">
                                     {comment.author}
