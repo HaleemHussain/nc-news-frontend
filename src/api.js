@@ -20,6 +20,19 @@ export const getArticleById = (article_id) => {
         });
 };
 
+export const getArticlesByTopic = (topic, sort_by, order) => {
+    return API.get("/articles", {
+            params: {
+                topic,
+                sort_by,
+                order,
+            },
+        })
+        .then(({ data }) => {
+            return data.articles;
+        });
+};
+
 export const getComments = (article_id) => {
     return API.get(`/articles/${article_id}/comments`)
         .then((res) => {
