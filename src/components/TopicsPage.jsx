@@ -4,20 +4,31 @@ import {Container} from "react-bootstrap";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useEffect, useState} from "react";
-import {getArticles} from "../api";
-import {Link} from "react-router-dom";
+import {getArticlesByTopic} from "../api";
+import {Link, useParams} from "react-router-dom";
 
 
-export default function Articles() {
+export default function TopicsPage() {
     const [articles, setArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [sortBy, setSortBy] = useState("created_at");
+    const [order, setOrder] = useState("desc");
+    const {topic} = useParams();
+
     useEffect(() => {
-        setIsLoading(true);
-        getArticles().then((data) => {
+        getArticlesByTopic(topic, sortBy, order).then((data) => {
             setArticles(data);
             setIsLoading(false);
         });
-    }, []);
+    }, [topic, sortBy, order]);
+
+    const handleSortChange = (event) => {
+        setSortBy(event.target.value);
+    };
+
+    const handleOrderChange = (event) => {
+        setOrder(event.target.value);
+    };
 
     if (isLoading) return (
         <div className='container pt-4 h-100 d-flex align-items-center justify-content-center'>
@@ -28,8 +39,18 @@ export default function Articles() {
     )
 
     return (
-        <Container className="mt-5">
+        <Container className="mt-3">
             <Row>
+                <h5 className='mt-2'>Sort By</h5>
+                <select className='form-select mt-1 mb-2' value={sortBy} onChange={handleSortChange}>
+                    <option value="created_at">Date</option>
+                    <option value="author">Author</option>
+                    <option value="votes">Votes</option>
+                </select>
+                <select className='form-select mb-4' value={order} onChange={handleOrderChange}>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
                 {articles.map((article) => {
                     return (
                         <Col key={article.article_id}
@@ -57,3 +78,4 @@ export default function Articles() {
         </Container>
     );
 }
+
