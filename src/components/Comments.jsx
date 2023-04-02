@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {getComments, addComment} from "../api";
+import {DateTime} from "luxon";
 
 export default function Comments({article_id}) {
     const [comments, setComments] = useState([]);
@@ -77,9 +78,9 @@ export default function Comments({article_id}) {
                             <blockquote className=" border-top pt-3">
                                 <p>{comment.body}</p>
                                 <footer className="blockquote-footer">
-                                    {comment.author}
+                                    {comment.author} at <small>{DateTime.fromISO(comment.created_at).toLocaleString(DateTime.DATETIME_SHORT)}</small>
                                     <div className='float-end'>
-                                        <button type="button" className="btn btn-primary">
+                                        <button type="button" className="btn btn-primary" disabled>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  fill="currentColor" className="bi bi-hand-thumbs-up"
                                                  viewBox="0 0 16 16">

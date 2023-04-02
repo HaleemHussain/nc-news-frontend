@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {articleVote, getArticleById} from "../api";
 import Comments from "./Comments";
 import Row from "react-bootstrap/Row";
+import {DateTime} from "luxon";
 
 export default function Article() {
     const {article_id} = useParams();
@@ -40,6 +41,9 @@ export default function Article() {
                 <div className="card mb-3">
                     <img src={article.article_img_url} className="card-img-top" alt="article"/>
                     <div className="card-body">
+                        <small>
+                            {DateTime.fromISO(article.created_at).toLocaleString(DateTime.DATETIME_SHORT)}
+                        </small>
                         <h5 className="card-title">{article.title}</h5>
                         <p className="card-text">{article.body}</p>
                         <p className="card-text"><small className="text-muted">By {article.author}</small></p>

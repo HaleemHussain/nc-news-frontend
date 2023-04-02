@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import {useEffect, useState} from "react";
 import {getArticles} from "../api";
 import {Link} from "react-router-dom";
+import {DateTime} from "luxon";
 
 
 export default function Articles() {
@@ -38,14 +39,19 @@ export default function Articles() {
                                 <Card.Img variant="top"
                                           src={article.article_img_url}/>
                                 <Card.Body className='justify-content-around'>
+                                    <small>
+                                        {DateTime.fromISO(article.created_at).toLocaleString(DateTime.DATETIME_SHORT)}
+                                    </small>
                                     <Card.Title>
                                         {article.title}
                                     </Card.Title>
                                     <div className='card-text'>
-                                        <p>Topic: {article.topic}</p>
-                                        <p>Author:{article.author}</p>
+                                        <p className='float-end'>Topic: {article.topic}</p>
+                                        <p>Votes: {article.votes}</p>
+                                        <p className='float-end'>Author: {article.author}</p>
+                                        <p>Comments: {article.comment_count}</p>
                                     </div>
-                                    <Link to={`/articles/${article.article_id}`}>
+                                    <Link to={`/article/${article.article_id}`}>
                                         <Button variant="primary m-1">View Article</Button>
                                     </Link>
                                 </Card.Body>
