@@ -1,4 +1,32 @@
-# Getting Started with Create React App
+# NC NEWS React App
+
+This is the frontend of my NC-NEWS-API it's a news app with articles you can sort through these articles and order them, you can also like articles and leave comments.
+
+This app is made with ReactJs and the CSS library React-Bootstrap.
+
+The Frontend is hosted at https://haleemnews.netlify.app/.
+
+The Backend is hosted at https://nc-news-o54u.onrender.com/api The repo is available on Github at https://github.com/HaleemHussain/nc-news-api.
+
+## Instructions
+
+1. Clone this repo with `git clone https://github.com/HaleemHussain/nc-news-frontend.git`.
+2. CD into the project directory.
+3. Run `npm install`.
+4. To run the project locally run `npm start`.
+
+## Dependencies
+
+```
+    "axios": "^1.3.4",
+    "bootstrap": "^5.2.3",
+    "luxon": "^3.3.0",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.9.0",
+    "react-scripts": "5.0.1"
+```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -44,27 +72,3 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
